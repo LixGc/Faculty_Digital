@@ -1,5 +1,6 @@
 const { comparePassword } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
+const { OAuth2Client } = require("google-auth-library");
 const { User } = require("../models");
 class AuthController {
   static async register(req, res, next) {
@@ -32,7 +33,6 @@ class AuthController {
       if (!user) {
         throw { name: `not_valid` };
       }
-
       const isPasswordValid = comparePassword(password, user.password);
       if (!isPasswordValid) {
         throw { name: `not_valid` };
@@ -43,6 +43,40 @@ class AuthController {
       next(error);
     }
   }
-  static async googleLogin(req, res, next) {}
+  static async googleLogin(req, res, next) {
+    try {
+      const { google_token } = req.headers;
+      const client = new OAuth2Client();
+      const ticket = await client.verifyIdToken({
+        idToken: google_token,
+        audience: process.env.GOOGLE_CLIENT_ID,
+      });
+      const payload = ticket.getPayload();
+      const [user, isCreated] = await User.findOrCreate({
+        where: {
+          email: payload.email,
+        },
+        defaults: {
+          username: payload.name,
+          email: payload.email,
+          password: "ThisIsRandomPassword(So when it is being compared with real password will always result in false)",
+          role: "customer",
+        },
+        hooks: false,
+      });
+
+      const access_token = signToken({
+        id: user.id,
+      });
+      let status = 200;
+      if (isCreated) {
+        status = 201;
+      }
+      res.status(status).json({ access_token });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
 }
 module.exports = AuthController;
