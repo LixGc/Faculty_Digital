@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Mouse",
+    "amount": 3,
+    "category": "Electronics",
+    "price": 30
+  },
+  {
+    "name": "Chair",
+    "amount": 2,
+    "category": "Furniture",
+    "price": 30
+  }
+]

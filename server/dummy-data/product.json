@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Mouse",
+    "category": "Electronics",
+    "price": 10,
+    "stock": 20,
+    "totalSold": 5,
+    "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.jAcDXmPBPK2aUWmVz19pWgHaHa%26pid%3DApi&f=1&ipt=c60374d995beb9ed08c4879b33a68b3c7eca6efdd0c0520c10f3924f31928502&ipo=images"
+  },
+  {
+    "name": "Chair",
+    "category": "Furniture",
+    "price": 15,
+    "stock": 10,
+    "totalSold": 10,
+    "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.l0B0_enqpGaxX3iY4tvmOQHaHa%26pid%3DApi&f=1&ipt=e68cccceb55a69d33f761db7e9c3182c9d6db7b2ee792e679ae996032941dd8c&ipo=images"
+  }
+]
