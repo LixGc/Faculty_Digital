@@ -13,12 +13,77 @@ module.exports = (sequelize, DataTypes) => {
   }
   Product.init(
     {
-      name: DataTypes.STRING,
-      category: DataTypes.STRING,
-      price: DataTypes.INTEGER,
-      stock: DataTypes.INTEGER,
-      totalSold: DataTypes.INTEGER,
-      imageUrl: DataTypes.TEXT,
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: {
+          msg: "This product already existed!",
+        },
+        validate: {
+          notEmpty: {
+            msg: "Name can't be empty!",
+          },
+          notEmpty: {
+            msg: "Name can't be empty!",
+          },
+        },
+      },
+      category: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Category can't be empty!",
+          },
+          notEmpty: {
+            msg: "Category can't be empty!",
+          },
+        },
+      },
+      price: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Price can't be empty!",
+          },
+          notEmpty: {
+            msg: "Price can't be empty!",
+          },
+          min: {
+            args: [1],
+            msg: "Price must be at least $1!",
+          },
+        },
+      },
+      stock: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Stock can't be empty!",
+          },
+          notEmpty: {
+            msg: "Stock can't be empty!",
+          },
+        },
+      },
+      totalSold: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
+      imageUrl: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Image can't be empty!",
+          },
+          notEmpty: {
+            msg: "Image can't be empty!",
+          },
+        },
+      },
     },
     {
       sequelize,
