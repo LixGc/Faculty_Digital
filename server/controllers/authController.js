@@ -46,6 +46,3 @@ class AuthController {
   static async googleLogin(req, res, next) {}
 }
 module.exports = AuthController;
-router.post("/register", AuthController.register);
-router.post("/login", AuthController.login);
-router.post("/google-login", AuthController.googleLogin);
