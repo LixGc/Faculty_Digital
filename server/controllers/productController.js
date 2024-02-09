@@ -56,11 +56,18 @@ class ProductController {
       };
       res.json(result);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
-  static async addProduct(req, res, next) {}
+  static async addProduct(req, res, next) {
+    try {
+      const { name, price, stock, category, imageUrl } = req.body;
+      await Product.create({ name, price, stock, category, imageUrl });
+      res.status(201).json({ message: `${name} has been successfully added!` });
+    } catch (error) {
+      next(error);
+    }
+  }
   static async editProduct(req, res, next) {}
   static async deleteProduct(req, res, next) {}
 }
