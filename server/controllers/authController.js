@@ -15,7 +15,6 @@ class AuthController {
       await User.create({ email, password });
       res.status(201).json({ message: `Account succesfully created!` });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -74,7 +73,6 @@ class AuthController {
       }
       res.status(status).json({ access_token });
     } catch (error) {
-      console.log(error);
       res.status(500).json({ message: "Internal Server Error" });
     }
   }
