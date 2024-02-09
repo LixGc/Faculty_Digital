@@ -1,4 +1,4 @@
-const { Op } = require("sequelize");
+const { Op, where } = require("sequelize");
 const {
   countTodayRevenue,
   countTodayProductSold,
@@ -68,7 +68,16 @@ class ProductController {
       next(error);
     }
   }
-  static async editProduct(req, res, next) {}
+
+  static async editProduct(req, res, next) {
+    try {
+      const { id, name, price, stock, category, imageUrl } = req.body;
+      await Product.update({ name, price, stock, category, imageUrl }, { where: id });
+      res.json({ message: "Product successfully updated!" });
+    } catch (error) {
+      next(error);
+    }
+  }
   static async deleteProduct(req, res, next) {}
 }
 module.exports = ProductController;
