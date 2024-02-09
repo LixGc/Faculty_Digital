@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import DashboardSection from '../views/DashboardSection.vue'
+import ProductSection from '../views/ProductSection.vue'
+import RevenueSection from '../views/RevenueSection.vue'
 import LoginSection from '../views/LoginSection.vue'
 import RegisterSection from '../views/RegisterSection.vue'
 const router = createRouter({
@@ -7,8 +8,13 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'dashboard',
-      component: DashboardSection
+      name: 'revenue',
+      component: RevenueSection
+    },
+    {
+      path: '/products',
+      name: 'products',
+      component: ProductSection
     },
     {
       path: '/login',
