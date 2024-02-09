@@ -73,7 +73,7 @@ const countPreviousWeekRevenue = (transactions) => {
   });
   return totalRevenuePreviousWeek;
 };
-
+// helper function to count last 7 days total product sold
 const countLast7DaysProductSold = (transactions) => {
   let totalProductSoldLast7Days = 0;
 
