@@ -5,7 +5,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     const transactions = require("../dummy-data/transaction.json");
     const transactionData = transactions.map((el) => {
-      el.createdAt = el.updatedAt = new Date();
+      el.updatedAt = new Date();
       return el;
     });
     await queryInterface.bulkInsert("Transactions", transactionData, {});
