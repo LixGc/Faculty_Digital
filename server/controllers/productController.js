@@ -8,22 +8,9 @@ const {
 } = require("../helpers/revenueCounter");
 const { Product, Transaction } = require("../models");
 class ProductController {
-  static async dashboard(req, res, next) {
+  static async revenue(req, res, next) {
     try {
-      const productOption = {
-        include: [Transaction],
-      };
-
-      // Filtering product by name
-      if (req.query.productName && req.query.productName.trim() !== "") {
-        productOption.where = {
-          name: {
-            [Op.iLike]: `%${req.query.productName}%`,
-          },
-        };
-      }
       const transactionOption = {};
-
       // Filtering transaction by product name
       if (req.query.transactionProductName && req.query.transactionProductName.trim() !== "") {
         transactionOption.where = {
@@ -32,9 +19,8 @@ class ProductController {
           },
         };
       }
-      let products = await Product.findAll(productOption);
+
       let transactionHistory = await Transaction.findAll(transactionOption);
-      let totalProducts = products.length;
       let totalProductSold = transactionHistory.reduce((accumulator, el) => {
         return accumulator + el.amount;
       }, 0);
@@ -52,7 +38,6 @@ class ProductController {
       averageLast7DaysProductSold = averageLast7DaysProductSold.toFixed(2);
       let thisWeekRevenueComparedWithPreviousWeekRevenue = totalRevenueLast7Days - totalRevenuePreviousWeek;
       let result = {
-        products,
         transactionHistory,
         totalProducts,
         totalRevenue,
@@ -67,6 +52,26 @@ class ProductController {
         thisWeekRevenueComparedWithPreviousWeekRevenue,
       };
       res.json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async product(req, res, next) {
+    try {
+      const productOption = {
+        include: [Transaction],
+      };
+
+      // Filtering product by name
+      if (req.query.productName && req.query.productName.trim() !== "") {
+        productOption.where = {
+          name: {
+            [Op.iLike]: `%${req.query.productName}%`,
+          },
+        };
+      }
+      let products = await Product.findAll(productOption);
+      res.json(products);
     } catch (error) {
       next(error);
     }
