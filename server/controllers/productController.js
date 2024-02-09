@@ -72,12 +72,20 @@ class ProductController {
   static async editProduct(req, res, next) {
     try {
       const { id, name, price, stock, category, imageUrl } = req.body;
-      await Product.update({ name, price, stock, category, imageUrl }, { where: id });
+      await Product.update({ name, price, stock, category, imageUrl }, { where: { id } });
       res.json({ message: "Product successfully updated!" });
     } catch (error) {
       next(error);
     }
   }
-  static async deleteProduct(req, res, next) {}
+  static async deleteProduct(req, res, next) {
+    try {
+      const { id } = req.body;
+      await Product.destroy({ where: { id } });
+      res.json({ message: "Product successfully deleted!" });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 module.exports = ProductController;
