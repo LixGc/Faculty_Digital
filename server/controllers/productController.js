@@ -10,18 +10,30 @@ const { Product, Transaction } = require("../models");
 class ProductController {
   static async dashboard(req, res, next) {
     try {
-      const option = {
+      const productOption = {
         include: [Transaction],
       };
-      if (req.query.name && req.query.name.trim() !== "") {
-        option.where = {
+
+      // Filtering product by name
+      if (req.query.productName && req.query.productName.trim() !== "") {
+        productOption.where = {
           name: {
-            [Op.iLike]: `%${req.query.name}%`,
+            [Op.iLike]: `%${req.query.productName}%`,
           },
         };
       }
-      let products = await Product.findAll(option);
-      let transactionHistory = await Transaction.findAll();
+      const transactionOption = {};
+
+      // Filtering transaction by product name
+      if (req.query.transactionProductName && req.query.transactionProductName.trim() !== "") {
+        transactionOption.where = {
+          name: {
+            [Op.iLike]: `%${req.query.transactionProductName}%`,
+          },
+        };
+      }
+      let products = await Product.findAll(productOption);
+      let transactionHistory = await Transaction.findAll(transactionOption);
       let totalProducts = products.length;
       let totalProductSold = transactionHistory.reduce((accumulator, el) => {
         return accumulator + el.amount;
