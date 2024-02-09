@@ -68,10 +68,6 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      totalSold: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
-      },
       imageUrl: {
         type: DataTypes.TEXT,
         allowNull: false,

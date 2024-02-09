@@ -68,8 +68,6 @@ const countPreviousWeekRevenue = (transactions) => {
 
   transactions.forEach((el) => {
     if (new Date(el.createdAt) < sevenDaysAgo && new Date(el.createdAt) >= last14DaysAgo) {
-      console.log(sevenDaysAgo, last14DaysAgo);
-      console.log(new Date(el.createdAt));
       totalRevenuePreviousWeek += el.price;
     }
   });

@@ -3,12 +3,48 @@
     "name": "Mouse",
     "amount": 3,
     "category": "Electronics",
-    "price": 30
+    "price": 30,
+    "ProductId": 1,
+    "createdAt": "2024-02-09T08:54:07.487Z"
+  },
+  {
+    "name": "iPhone 15 Pro Max",
+    "amount": 1,
+    "category": "Electronics",
+    "price": 1900,
+    "ProductId": 4,
+    "createdAt": "2024-02-05T08:54:07.487Z"
+  },
+  {
+    "name": "Air-Conditioner",
+    "amount": 2,
+    "category": "Furniture",
+    "price": 240,
+    "ProductId": 3,
+    "createdAt": "2024-02-01T08:54:07.487Z"
+  },
+  {
+    "name": "Mouse",
+    "amount": 5,
+    "category": "Electronics",
+    "price": 50,
+    "ProductId": 1,
+    "createdAt": "2024-02-03T08:54:07.487Z"
   },
   {
     "name": "Chair",
-    "amount": 2,
+    "amount": 3,
+    "category": "Electronics",
+    "price": 45,
+    "ProductId": 2,
+    "createdAt": "2024-02-09T08:54:07.487Z"
+  },
+  {
+    "name": "Air-Conditioner",
+    "amount": 3,
     "category": "Furniture",
-    "price": 30
+    "price": 360,
+    "ProductId": 3,
+    "createdAt": "2024-01-31T08:54:07.487Z"
   }
 ]

@@ -4,7 +4,6 @@
     "category": "Electronics",
     "price": 10,
     "stock": 20,
-    "totalSold": 5,
     "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.jAcDXmPBPK2aUWmVz19pWgHaHa%26pid%3DApi&f=1&ipt=c60374d995beb9ed08c4879b33a68b3c7eca6efdd0c0520c10f3924f31928502&ipo=images"
   },
   {
@@ -12,7 +11,20 @@
     "category": "Furniture",
     "price": 15,
     "stock": 10,
-    "totalSold": 10,
     "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.l0B0_enqpGaxX3iY4tvmOQHaHa%26pid%3DApi&f=1&ipt=e68cccceb55a69d33f761db7e9c3182c9d6db7b2ee792e679ae996032941dd8c&ipo=images"
+  },
+  {
+    "name": "Air-Conditioner",
+    "category": "Electronics",
+    "price": 120,
+    "stock": 5,
+    "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.LRqjt4neFBKgqs5keijOfAHaHa%26pid%3DApi&f=1&ipt=19ff4e8b57288f41d84b22709232d206f4c514765edbdf5adbc213ce7b65c726&ipo=images"
+  },
+  {
+    "name": "iPhone 15 Pro Max",
+    "category": "Electronics",
+    "price": 1900,
+    "stock": 10,
+    "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.iphoned.nl%2Fwp-content%2Fuploads%2F2023%2F08%2Fiphone-15-pro-max-alle-kleuren.jpg&f=1&nofb=1&ipt=9fb947f76462fb9a480afd07ce40351fdffcb5022d34f7ad703c7f1295aff763&ipo=images"
   }
 ]
