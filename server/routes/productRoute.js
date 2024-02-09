@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const ProductController = require("../controllers/productController");
+const loginAuthentication = require("../middlewares/loginAuthentication");
 
-router.get("/dashboard", ProductController.dashboard);
-router.post("/add-product", ProductController.addProduct);
-router.put("/edit-product", ProductController.editProduct);
-router.delete("/delete-product", ProductController.deleteProduct);
+router.get("/dashboard", loginAuthentication, ProductController.dashboard);
+router.post("/add-product", loginAuthentication, ProductController.addProduct);
+router.put("/edit-product", loginAuthentication, ProductController.editProduct);
+router.delete("/delete-product", loginAuthentication, ProductController.deleteProduct);
 module.exports = router;
