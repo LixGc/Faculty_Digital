@@ -1,7 +1,65 @@
+const { Op } = require("sequelize");
+const {
+  countTodayRevenue,
+  countTodayProductSold,
+  countLast7DaysRevenue,
+  countPreviousWeekRevenue,
+  countLast7DaysProductSold,
+} = require("../helpers/revenueCounter");
+const { Product, Transaction } = require("../models");
 class ProductController {
-  static async revenue(req, res, next) {}
-  static async products(req, res, next) {}
-  static async productTransaction(req, res, next) {}
+  static async dashboard(req, res, next) {
+    try {
+      const option = {
+        include: [Transaction],
+      };
+      if (req.query.name && req.query.name.trim() !== "") {
+        option.where = {
+          name: {
+            [Op.iLike]: `%${req.query.name}%`,
+          },
+        };
+      }
+      let products = await Product.findAll(option);
+      let transactionHistory = await Transaction.findAll();
+      let totalProducts = products.length;
+      let totalProductSold = transactionHistory.reduce((accumulator, el) => {
+        return accumulator + el.amount;
+      }, 0);
+      let totalRevenue = transactionHistory.reduce((accumulator, el) => {
+        return accumulator + el.price;
+      }, 0);
+      let todayRevenue = countTodayRevenue(transactionHistory);
+      let todayProductSold = countTodayProductSold(transactionHistory);
+      let totalProdudctSoldLast7Days = countLast7DaysProductSold(transactionHistory);
+      let totalRevenueLast7Days = countLast7DaysRevenue(transactionHistory);
+      let totalRevenuePreviousWeek = countPreviousWeekRevenue(transactionHistory);
+      let averageLast7DaysRevenue = totalRevenueLast7Days / 7;
+      let averageLast7DaysProductSold = totalProdudctSoldLast7Days / 7;
+      averageLast7DaysRevenue = averageLast7DaysRevenue.toFixed(2);
+      averageLast7DaysProductSold = averageLast7DaysProductSold.toFixed(2);
+      let thisWeekRevenueComparedWithPreviousWeekRevenue = totalRevenueLast7Days - totalRevenuePreviousWeek;
+      let result = {
+        products,
+        transactionHistory,
+        totalProducts,
+        totalRevenue,
+        totalProductSold,
+        totalProdudctSoldLast7Days,
+        todayRevenue,
+        todayProductSold,
+        totalRevenueLast7Days,
+        totalRevenuePreviousWeek,
+        averageLast7DaysProductSold,
+        averageLast7DaysRevenue,
+        thisWeekRevenueComparedWithPreviousWeekRevenue,
+      };
+      res.json(result);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
   static async addProduct(req, res, next) {}
   static async editProduct(req, res, next) {}
   static async deleteProduct(req, res, next) {}
