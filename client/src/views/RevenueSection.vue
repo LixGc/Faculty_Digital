@@ -1,9 +1,20 @@
 <script>
+import { mapActions, mapState } from 'pinia';
 import SearchButton from '@/components/SearchButton.vue';
+import { useProductStore } from '../stores/product';
 export default {
     components: {
-        SearchButton
+        SearchButton,
     },
+    methods: {
+        ...mapActions(useProductStore, ['fetchProduct']),
+    },
+    computed: {
+        ...mapState(useProductStore, ['products'])
+    },
+    created () {
+        this.fetchProduct()
+    }
 }
 </script>
 <template>
@@ -98,7 +109,9 @@ export default {
                             <th class="py-2 px-4 text-left">Name</th>
                             <th class="py-2 px-4 border-r">Category</th>
                             <th class="py-2 px-4 text-left">Price</th>
-                            <th class="py-2 px-4">Stock</th>
+                            <th class="py-2 px-4 text-left">Price</th>
+                            <th class="py-2 px-4 text-left">Edit</th>
+                            <th class="py-2 px-4 text-left">Delete</th>
                         </tr>
                     </thead>
 
