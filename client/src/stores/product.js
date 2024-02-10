@@ -2,7 +2,8 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 export const useProductStore = defineStore('product', {
   state: () => ({
-    baseUrl: 'http://localhost:3000/product/',
+    // baseUrl: 'http://localhost:3000/product/',
+    baseUrl: 'https://facultydigital.flixy.online/product/',
     products: [],
     revenues: [],
     categories: ['Furniture', 'Electronics', 'Decorations', 'Clothing']

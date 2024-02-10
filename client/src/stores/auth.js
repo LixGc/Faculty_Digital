@@ -2,7 +2,8 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    baseUrl: 'http://localhost:3000/auth/',
+    // baseUrl: 'http://localhost:3000/auth/',
+    baseUrl: 'https://facultydigital.flixy.online/auth/',
     hasLogin: false
   }),
   actions: {
@@ -70,6 +71,7 @@ export const useAuthStore = defineStore('auth', {
           title: 'Oops...',
           text: 'Oops, something went wrong'
         })
+        console.log(error)
       }
     }
   }

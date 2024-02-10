@@ -1,6 +1,7 @@
 <script>
 import { mapActions } from 'pinia';
 import { useAuthStore } from '../stores/auth';
+import { useProductStore } from '@/stores/product';
 export default {
     data () {
         return {
@@ -24,7 +25,11 @@ export default {
             this.$router.push('/')
         },
         async handleGoogleLogin (response) {
-            await useAuthStore().handleGoogleLogin(response);
+            try {
+                await useAuthStore().handleGoogleLogin(response);
+            } catch (error) {
+                console.log(error);
+            }
         },
     }
 }
