@@ -56,10 +56,8 @@ class AuthController {
           email: payload.email,
         },
         defaults: {
-          username: payload.name,
           email: payload.email,
           password: "ThisIsRandomPassword(So when it is being compared with real password will always result in false)",
-          role: "customer",
         },
         hooks: false,
       });
