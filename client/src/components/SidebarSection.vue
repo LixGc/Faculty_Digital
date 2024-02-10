@@ -34,12 +34,7 @@ export default {
                 <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.istockphoto.com%2Fvectors%2Fman-icon-black-icon-person-symbol-vector-id1332100919%3Fk%3D20%26m%3D1332100919%26s%3D612x612%26w%3D0%26h%3DzkXGeOtSyUajHAoWxlTPTC-qWjjnUkh6twiCK9b0JoI%3D&f=1&nofb=1&ipt=6dad630a3d1b3a22b844d7c50fc6cae0e6a637427569696a513ba9d9ac082b46&ipo=images"
                     alt="" class="w-12 h-12 rounded-full dark:bg-gray-500" />
                 <div>
-                    <h2 class="text-lg font-semibold">user email</h2>
-                    <span class="flex items-center space-x-1">
-                        <a rel="noopener noreferrer" class="text-xs hover:underline dark:text-gray-400">
-                            View profile
-                        </a>
-                    </span>
+                    <h2 class="text-lg font-semibold">Admin</h2>
                 </div>
             </div>
             <div class="divide-y dark:divide-gray-700">
