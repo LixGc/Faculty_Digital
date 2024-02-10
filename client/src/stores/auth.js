@@ -29,12 +29,10 @@ export const useAuthStore = defineStore('auth', {
     async login(value) {
       try {
         const { data } = await axios.post(this.baseUrl + 'login', value)
-        console.log(data)
         const access_token = data.access_token
         localStorage.setItem('access_token', access_token)
         this.router.push('/')
         this.hasLogin = true
-        const role = data.role
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -68,7 +66,11 @@ export const useAuthStore = defineStore('auth', {
           timer: 3000
         })
       } catch (error) {
-        console.log(error)
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Oops, something went wrong'
+        })
       }
     }
   }
