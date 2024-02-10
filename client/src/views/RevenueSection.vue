@@ -44,6 +44,80 @@ export default {
                         </h6>
                     </div>
                 </div>
+                <div class="w-full md:w-1/2 px-4 mb-4">
+                    <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
+                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Last 7 Days Ago Daily Average Revenue</h6>
+                        <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
+                            ${{ revenues.averageLast7DaysRevenue }}
+                        </h6>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/5 px-4 mb-4">
+                    <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
+                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Last 7 Days Ago Revenue</h6>
+                        <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
+                            ${{ revenues.totalRevenueLast7Days }}
+                        </h6>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/4 px-4 mb-4">
+                    <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
+                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Last 7-14 Days Ago Revenue</h6>
+                        <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
+                            ${{ revenues.totalRevenuePreviousWeek }}
+                        </h6>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/3 px-4 mb-4">
+                    <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
+                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Last 7 Days Ago Vs Last 7-14 Days Ago
+                            Revenue</h6>
+                        <h6 v-if="revenues.thisWeekRevenueComparedWithPreviousWeekRevenue < 0"
+                            class="text-lg font-semibold text-red-500">
+                            -${{ Math.abs(revenues.thisWeekRevenueComparedWithPreviousWeekRevenue) }}
+                        </h6>
+                        <h6 v-else-if="revenues.thisWeekRevenueComparedWithPreviousWeekRevenue > 0"
+                            class="text-lg font-semibold text-green-500">
+                            +${{ revenues.thisWeekRevenueComparedWithPreviousWeekRevenue }}
+                        </h6>
+                        <h6 v-else class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                            ${{ revenues.thisWeekRevenueComparedWithPreviousWeekRevenue }}
+                        </h6>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/4 px-4 mb-4">
+                    <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
+                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Last 30 Days Ago Revenue</h6>
+                        <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
+                            ${{ revenues.totalRevenueLast30DaysAgo }}
+                        </h6>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/4  px-4 mb-4">
+                    <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
+                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Last 30-60 Days Ago Revenue</h6>
+                        <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
+                            ${{ revenues.totalRevenueLast60Days }}
+                        </h6>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/3 px-4 mb-4">
+                    <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
+                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Last 30 Days Ago Vs Last 30-60 Days Ago
+                            Revenue</h6>
+                        <h6 v-if="revenues.last30DaysAgoComparedWithLast60DaysAgoRevenue < 0"
+                            class="text-lg font-semibold text-red-500">
+                            -${{ Math.abs(revenues.last30DaysAgoComparedWithLast60DaysAgoRevenue) }}
+                        </h6>
+                        <h6 v-else-if="revenues.last30DaysAgoComparedWithLast60DaysAgoRevenue > 0"
+                            class="text-lg font-semibold text-green-500">
+                            +${{ revenues.last30DaysAgoComparedWithLast60DaysAgoRevenue }}
+                        </h6>
+                        <h6 v-else class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                            ${{ revenues.last30DaysAgoComparedWithLast60DaysAgoRevenue }}
+                        </h6>
+                    </div>
+                </div>
                 <div class="w-full md:w-1/5 px-4 mb-4">
                     <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
                         <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Products Sold</h6>
@@ -60,15 +134,8 @@ export default {
                         </h6>
                     </div>
                 </div>
-                <div class="w-full md:w-1/5 px-4 mb-4">
-                    <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
-                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Average Last 7 Days Revenue</h6>
-                        <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
-                            ${{ revenues.averageLast7DaysRevenue }}
-                        </h6>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/5 px-4 mb-4">
+
+                <div class="w-full md:w-1/3 px-4 mb-4">
                     <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
                         <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Average Last 7 Days Product Sold</h6>
                         <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
@@ -76,36 +143,69 @@ export default {
                         </h6>
                     </div>
                 </div>
-                <div class="w-full md:w-1/5 px-4 mb-4">
+                <div class="w-full md:w-1/4 px-4 mb-4">
                     <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
-                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">This Week's Revenue</h6>
+                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Last 7 Days Ago Product Sold</h6>
                         <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
-                            ${{ revenues.totalRevenueLast7Days }}
+                            {{ revenues.totalProdudctSoldLast7Days }}
                         </h6>
                     </div>
                 </div>
-                <div class="w-full md:w-1/5 px-4 mb-4">
+                <div class="w-full md:w-1/4 px-4 mb-4">
                     <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
-                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Previous Week's Revenue</h6>
+                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Last 7-14 Days Ago Product Sold</h6>
                         <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
-                            ${{ revenues.totalRevenuePreviousWeek }}
+                            {{ revenues.totalProductSoldPreviousWeek }}
                         </h6>
                     </div>
                 </div>
-                <div class="w-full md:w-1/2 px-4 mb-4">
+                <div class="w-full md:w-1/3 px-4 mb-4">
                     <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
-                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">This Week's Revenue Vs Previous Week's
-                            Revenue</h6>
-                        <h6 v-if="revenues.thisWeekRevenueComparedWithPreviousWeekRevenue < 0"
+                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Last 7 Days Ago Vs Last 7-14 Days Ago
+                            Product Sold</h6>
+                        <h6 v-if="revenues.thisWeekProductSoldComparedWithPreviousWeekRevenue < 0"
                             class="text-lg font-semibold text-red-500">
-                            -${{ Math.abs(revenues.thisWeekRevenueComparedWithPreviousWeekRevenue) }}
+                            -{{ Math.abs(revenues.thisWeekProductSoldComparedWithPreviousWeekRevenue) }}
                         </h6>
-                        <h6 v-else-if="revenues.thisWeekRevenueComparedWithPreviousWeekRevenue > 0"
+                        <h6 v-else-if="revenues.thisWeekProductSoldComparedWithPreviousWeekRevenue > 0"
                             class="text-lg font-semibold text-green-500">
-                            +${{ revenues.thisWeekRevenueComparedWithPreviousWeekRevenue }}
+                            +{{ revenues.thisWeekProductSoldComparedWithPreviousWeekRevenue }}
                         </h6>
                         <h6 v-else class="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                            ${{ revenues.thisWeekRevenueComparedWithPreviousWeekRevenue }}
+                            {{ revenues.thisWeekProductSoldComparedWithPreviousWeekRevenue }}
+                        </h6>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/4 px-4 mb-4">
+                    <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
+                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Last 30 Days Ago Revenue</h6>
+                        <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
+                            {{ revenues.totalProductSoldLast30Days }}
+                        </h6>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/4  px-4 mb-4">
+                    <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
+                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Last 30-60 Days Ago Revenue</h6>
+                        <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
+                            {{ revenues.totalProductSoldLast60Days }}
+                        </h6>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/3 px-4 mb-4">
+                    <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
+                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Last 30 Days Ago Vs Last 30-60 Days Ago
+                            Product Sold</h6>
+                        <h6 v-if="revenues.last30DaysAgoComparedWithLast60DaysAgoProductSold < 0"
+                            class="text-lg font-semibold text-red-500">
+                            -{{ Math.abs(revenues.last30DaysAgoComparedWithLast60DaysAgoProductSold) }}
+                        </h6>
+                        <h6 v-else-if="revenues.last30DaysAgoComparedWithLast60DaysAgoProductSold > 0"
+                            class="text-lg font-semibold text-green-500">
+                            +{{ revenues.last30DaysAgoComparedWithLast60DaysAgoProductSold }}
+                        </h6>
+                        <h6 v-else class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                            {{ revenues.last30DaysAgoComparedWithLast60DaysAgoProductSold }}
                         </h6>
                     </div>
                 </div>
