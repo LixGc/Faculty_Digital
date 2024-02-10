@@ -8,11 +8,11 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async register(data) {
       try {
-        const { data } = await axios.post(this.baseUrl + 'register', data)
+        await axios.post(this.baseUrl + 'register', data)
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: data.message,
+          title: 'Successfully Registered!',
           showConfirmButton: false,
           timer: 3000
         })
@@ -46,7 +46,6 @@ export const useAuthStore = defineStore('auth', {
           title: 'Oops...',
           text: error.response.data.message
         })
-        console.log(error)
       }
     },
     async handleGoogleLogin(response) {
