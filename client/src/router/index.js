@@ -28,5 +28,17 @@ const router = createRouter({
     }
   ]
 })
-
+router.beforeEach(async (to, from, next) => {
+  const hasLogin = localStorage.getItem('access_token')
+  if (!hasLogin && to.path === '/') {
+    next('/login')
+  } else if (!hasLogin && to.path === '/revenue') {
+    next('/login')
+  } else if ((hasLogin && to.path === '/login') || (hasLogin && to.path === '/register')) {
+    next('/')
+  } else {
+    // User is authenticated or on the login/register page
+    next()
+  }
+})
 export default router
