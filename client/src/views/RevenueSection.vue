@@ -25,7 +25,7 @@ export default {
 <template>
     <!-- Revenue Dashboard-->
     <div class="ml-60 p-2 mx-auto sm:p-4 dark:text-gray-100">
-        <h2 class="mb-4 text-2xl font-semibold leading">Statistics</h2>
+        <h2 class="mb-4 text-2xl font-semibold leading">Revenue and Product Statistics</h2>
         <div class="col-12 md:col-6 mb-3">
             <div class="flex flex-wrap -mx-4">
                 <div class="w-full md:w-1/5 px-4 mb-4">
