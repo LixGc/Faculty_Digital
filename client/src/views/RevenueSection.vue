@@ -2,18 +2,20 @@
 import { mapActions, mapState } from 'pinia';
 import SearchButton from '@/components/SearchButton.vue';
 import { useProductStore } from '../stores/product';
+import TransactionRow from '@/components/TransactionRow.vue';
 export default {
     components: {
         SearchButton,
+        TransactionRow
     },
     methods: {
-        ...mapActions(useProductStore, ['fetchProduct']),
+        ...mapActions(useProductStore, ['fetchRevenue']),
     },
     computed: {
-        ...mapState(useProductStore, ['products'])
+        ...mapState(useProductStore, ['revenues'])
     },
     created () {
-        this.fetchProduct()
+        this.fetchRevenue();
     }
 }
 </script>
@@ -27,7 +29,7 @@ export default {
                     <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
                         <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Total Revenue</h6>
                         <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
-                            1
+                            ${{ revenues.totalRevenue }}
                         </h6>
                     </div>
                 </div>
@@ -35,7 +37,7 @@ export default {
                     <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
                         <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Today's Revenue</h6>
                         <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
-                            1
+                            ${{ revenues.todayRevenue }}
                         </h6>
                     </div>
                 </div>
@@ -43,7 +45,7 @@ export default {
                     <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
                         <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Products Sold</h6>
                         <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
-                            1
+                            {{ revenues.totalProductSold }}
                         </h6>
                     </div>
                 </div>
@@ -51,7 +53,7 @@ export default {
                     <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
                         <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Today's Product Sold</h6>
                         <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
-                            1
+                            {{ revenues.todayProductSold }}
                         </h6>
                     </div>
                 </div>
@@ -59,7 +61,7 @@ export default {
                     <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
                         <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Average Last 7 Days Revenue</h6>
                         <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
-                            1
+                            ${{ revenues.averageLast7DaysRevenue }}
                         </h6>
                     </div>
                 </div>
@@ -67,7 +69,7 @@ export default {
                     <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
                         <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Average Last 7 Days Product Sold</h6>
                         <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
-                            1
+                            {{ revenues.averageLast7DaysProductSold }}
                         </h6>
                     </div>
                 </div>
@@ -75,7 +77,7 @@ export default {
                     <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
                         <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Total Revenue Last 7 Days</h6>
                         <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
-                            1
+                            ${{ revenues.totalRevenueLast7Days }}
                         </h6>
                     </div>
                 </div>
@@ -83,7 +85,7 @@ export default {
                     <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
                         <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Total Previous Week's Revenue</h6>
                         <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
-                            1
+                            ${{ revenues.totalRevenuePreviousWeek }}
                         </h6>
                     </div>
                 </div>
@@ -92,8 +94,16 @@ export default {
                         <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">This Week's Revenue Vs Previous
                             Week's
                             Revenue</h6>
-                        <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
-                            1
+                        <h6 v-if="revenues.thisWeekRevenueComparedWithPreviousWeekRevenue < 0"
+                            class="text-lg font-semibold text-red-500">
+                            -${{ revenues.thisWeekRevenueComparedWithPreviousWeekRevenue }}
+                        </h6>
+                        <h6 v-else-if="revenues.thisWeekRevenueComparedWithPreviousWeekRevenue > 0"
+                            class="text-lg font-semibold text-green-500">
+                            +${{ revenues.thisWeekRevenueComparedWithPreviousWeekRevenue }}
+                        </h6>
+                        <h6 v-else class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                            ${{ revenues.thisWeekRevenueComparedWithPreviousWeekRevenue }}
                         </h6>
                     </div>
                 </div>
@@ -106,27 +116,24 @@ export default {
                     <thead>
                         <tr class="bg-gray-200">
                             <th class="py-2 px-4 text-left">No.</th>
-                            <th class="py-2 px-4 text-left">Name</th>
-                            <th class="py-2 px-4 border-r">Category</th>
-                            <th class="py-2 px-4 text-left">Price</th>
-                            <th class="py-2 px-4 text-left">Price</th>
-                            <th class="py-2 px-4 text-left">Edit</th>
-                            <th class="py-2 px-4 text-left">Delete</th>
+                            <th class="py-2 px-4 text-left">Product Name</th>
+                            <th class="py-2 px-4 border-r text-center">Transaction Date</th>
+                            <th class="py-2 px-4 border-r text-center">Category</th>
+                            <th class="py-2 px-4 text-center">Amount</th>
+                            <th class="py-2 px-4 text-center">Total Price</th>
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody v-if="!revenues || !revenues.transactionHistory || revenues.transactionHistory.length === 0">
                         <tr>
-                            <td colSpan="5" class="text-gray-500 text-xl">
+                            <td colspan="6" class="text-gray-500 text-xl">
                                 No data found
                             </td>
                         </tr>
                     </tbody>
-                    <tbody>
-                        <tr>
-                            <td colSpan="5">
-                            </td>
-                        </tr>
+                    <tbody v-else>
+                        <TransactionRow v-for="(transaction, index) in revenues.transactionHistory" :key="index"
+                            :transaction="transaction" :index="index" />
                     </tbody>
                 </table>
             </div>

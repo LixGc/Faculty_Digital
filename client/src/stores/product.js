@@ -4,6 +4,7 @@ export const useProductStore = defineStore('product', {
   state: () => ({
     baseUrl: 'http://localhost:3000/product/',
     products: [],
+    revenues: [],
     categories: ['Furniture', 'Electronics', 'Decorations', 'Clothing']
   }),
   actions: {
@@ -14,6 +15,23 @@ export const useProductStore = defineStore('product', {
           params: { productName: val }
         })
         this.products = data
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.response.data.message
+            ? error.response.data.message
+            : 'Oops, something went wrong'
+        })
+      }
+    },
+    async fetchRevenue(val) {
+      try {
+        const { data } = await axios.get(this.baseUrl + 'revenue-dashboard', {
+          headers: { access_token: localStorage.access_token },
+          params: { transactionProductName: val }
+        })
+        this.revenues = data
       } catch (error) {
         Swal.fire({
           icon: 'error',
