@@ -2,14 +2,28 @@
 import { mapActions, mapState } from 'pinia';
 import SearchButton from '@/components/SearchButton.vue';
 import ProductRow from '@/components/ProductRow.vue';
+import AddProductModal from '../components/AddProductModal.vue';
+
 import { useProductStore } from '../stores/product';
 export default {
     components: {
         SearchButton,
-        ProductRow
+        ProductRow,
+        AddProductModal
+    },
+    data () {
+        return {
+            showAddProductModal: false
+        }
     },
     methods: {
         ...mapActions(useProductStore, ['fetchProduct']),
+        openAddProductModal () {
+            this.showAddProductModal=true;
+        },
+        closeAddProductModal () {
+            this.showAddProductModal=false;
+        },
     },
     computed: {
         ...mapState(useProductStore, ['products']),
@@ -18,7 +32,8 @@ export default {
         },
     },
     created () {
-        this.fetchProduct()
+        this.fetchProduct(),
+            this.showAddProductModal=false
     }
 }
 </script>
@@ -50,7 +65,8 @@ export default {
                     <SearchButton />
                 </div>
                 <div class="md:w-1/3 text-right mr-8">
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button @click.prevent="openAddProductModal"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Add Product
                     </button>
                 </div>
@@ -83,5 +99,8 @@ export default {
                 </table>
             </div>
         </div>
+    </div>
+    <div v-if="showAddProductModal">
+        <AddProductModal @close-modal="closeAddProductModal" />
     </div>
 </template>

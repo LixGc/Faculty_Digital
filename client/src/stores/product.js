@@ -25,7 +25,6 @@ export const useProductStore = defineStore('product', {
     },
     async editProduct(val) {
       try {
-        console.log(val)
         const confirmation = await Swal.fire({
           title: 'Do you want to save the changes?',
           showDenyButton: true,
@@ -35,14 +34,13 @@ export const useProductStore = defineStore('product', {
         })
         if (confirmation.isConfirmed) {
           const value = {
-            id: val.id,
             name: val.name,
             imageUrl: val.imageUrl,
             category: val.category,
             price: val.price,
             stock: val.stock
           }
-          await axios.put(this.baseUrl + 'edit-product', value, {
+          await axios.put(this.baseUrl + 'edit-product/' + value.id, value, {
             headers: { access_token: localStorage.access_token }
           })
           this.fetchProduct()
@@ -58,6 +56,56 @@ export const useProductStore = defineStore('product', {
             ? error.response.data.message
             : 'Oops, something went wrong'
         })
+      }
+    },
+    async addProduct(val) {
+      try {
+        await axios.post(this.baseUrl + 'add-product', val, {
+          headers: { access_token: localStorage.access_token }
+        })
+        this.fetchProduct()
+        Swal.fire({
+          title: 'Sweet!',
+          text: `Successfully added ${val.name}!`,
+          imageUrl: val.imageUrl,
+          imageWidth: 400,
+          imageHeight: 200,
+          imageAlt: val.name
+        })
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.response.data.message
+        })
+        console.log(error)
+      }
+    },
+    async deleteProduct(id) {
+      try {
+        const confirmation = await Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        })
+        if (confirmation.isConfirmed) {
+          await axios.delete(this.baseUrl + 'delete-product/', id, {
+            headers: { access_token: localStorage.access_token }
+          })
+          this.fetchProduct()
+          Swal.fire('Deleted!', 'success')
+        }
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.response.data.message
+        })
+        console.log(error)
       }
     }
   }

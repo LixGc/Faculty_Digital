@@ -7,7 +7,7 @@ export default {
     data () {
         return {
             showTransactionModal: false,
-            showEditProductModal: false
+            showEditProductModal: false,
         };
     },
     methods: {
@@ -23,10 +23,12 @@ export default {
         closeEditProductModal () {
             this.showEditProductModal=false;
         },
+
     },
     components: { ProductTransactionHistoryModal, EditProductModal },
     created () {
-        this.showTransactionModal=false
+        this.showTransactionModal=false,
+            this.showEditProductModal=false
     },
 }
 </script>
