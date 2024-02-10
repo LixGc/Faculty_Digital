@@ -39,7 +39,6 @@ class ProductController {
       let thisWeekRevenueComparedWithPreviousWeekRevenue = totalRevenueLast7Days - totalRevenuePreviousWeek;
       let result = {
         transactionHistory,
-        totalProducts,
         totalRevenue,
         totalProductSold,
         totalProdudctSoldLast7Days,
@@ -88,7 +87,8 @@ class ProductController {
 
   static async editProduct(req, res, next) {
     try {
-      const { id, name, price, stock, category, imageUrl } = req.body;
+      const { id } = req.params;
+      const { name, price, stock, category, imageUrl } = req.body;
       await Product.update({ name, price, stock, category, imageUrl }, { where: { id } });
       res.json({ message: "Product successfully updated!" });
     } catch (error) {
@@ -97,7 +97,7 @@ class ProductController {
   }
   static async deleteProduct(req, res, next) {
     try {
-      const { id } = req.body;
+      const { id } = req.params;
       await Product.destroy({ where: { id } });
       res.json({ message: "Product successfully deleted!" });
     } catch (error) {
