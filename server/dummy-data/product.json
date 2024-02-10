@@ -26,5 +26,19 @@
     "price": 1900,
     "stock": 10,
     "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.iphoned.nl%2Fwp-content%2Fuploads%2F2023%2F08%2Fiphone-15-pro-max-alle-kleuren.jpg&f=1&nofb=1&ipt=9fb947f76462fb9a480afd07ce40351fdffcb5022d34f7ad703c7f1295aff763&ipo=images"
+  },
+  {
+    "name": "Flower Bouquet",
+    "category": "Accesories",
+    "price": 5,
+    "stock": 25,
+    "imageUrl": "https://jooinn.com/images/beautiful-flower-bouquet-1.jpg"
+  },
+  {
+    "name": "Black Jean",
+    "category": "Clothing",
+    "price": 25,
+    "stock": 13,
+    "imageUrl": "https://tse2.mm.bing.net/th?id=OIP.jTKgc457JaYEa338Are3kgHaLH&pid=Api&P=0&h=180"
   }
 ]
