@@ -1,9 +1,11 @@
 <script>
 import EditProductModal from './EditProductModal.vue';
 import ProductTransactionHistoryModal from './ProductTransactionHistoryModal.vue';
-
+import { mapActions } from 'pinia';
+import { useProductStore } from '@/stores/product';
 export default {
     props: ['product', 'index'],
+    components: { ProductTransactionHistoryModal, EditProductModal },
     data () {
         return {
             showTransactionModal: false,
@@ -11,6 +13,7 @@ export default {
         };
     },
     methods: {
+        ...mapActions(useProductStore, ['deleteProduct']),
         openTransactionModal () {
             this.showTransactionModal=true;
         },
@@ -25,7 +28,6 @@ export default {
         },
 
     },
-    components: { ProductTransactionHistoryModal, EditProductModal },
     created () {
         this.showTransactionModal=false,
             this.showEditProductModal=false
@@ -49,7 +51,7 @@ export default {
             <a @click.prevent="openEditProductModal" style='font-size: large;' href="">&#9998;</a>
         </td>
         <td className="py-2 px-4 text-center">
-            <a href="">&#10060;</a>
+            <a @click.prevent="deleteProduct(product.id)" href="">&#10060;</a>
         </td>
 
     </tr>
