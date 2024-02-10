@@ -13,7 +13,8 @@ export default {
     },
     data () {
         return {
-            showAddProductModal: false
+            showAddProductModal: false,
+            search: ""
         }
     },
     methods: {
@@ -24,11 +25,20 @@ export default {
         closeAddProductModal () {
             this.showAddProductModal=false;
         },
+        fetchProductWithFilter (val) {
+            this.fetchProduct(val)
+        },
     },
     computed: {
         ...mapState(useProductStore, ['products']),
         totalStocks () {
             return this.products.reduce((total, product) => total+product.stock, 0);
+        },
+    },
+    watch: {
+        search: {
+            handler: 'searchProducts',
+            immediate: true,
         },
     },
     created () {
@@ -62,7 +72,7 @@ export default {
             </div>
             <div class="flex justify-between">
                 <div class="md:w-1/3">
-                    <SearchButton />
+                    <SearchButton @fetchProductWithFilter="fetchProductWithFilter" />
                 </div>
                 <div class="md:w-1/3 text-right mr-8">
                     <button @click.prevent="openAddProductModal"

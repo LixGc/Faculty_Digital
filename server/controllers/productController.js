@@ -60,7 +60,6 @@ class ProductController {
       const productOption = {
         include: [Transaction],
       };
-
       // Filtering product by name
       if (req.query.productName && req.query.productName.trim() !== "") {
         productOption.where = {

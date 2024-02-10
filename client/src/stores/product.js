@@ -7,10 +7,11 @@ export const useProductStore = defineStore('product', {
     categories: ['Furniture', 'Electronics', 'Decorations', 'Clothing']
   }),
   actions: {
-    async fetchProduct() {
+    async fetchProduct(val) {
       try {
-        const { data } = await axios(this.baseUrl + 'product-dashboard', {
-          headers: { access_token: localStorage.access_token }
+        const { data } = await axios.get(this.baseUrl + 'product-dashboard', {
+          headers: { access_token: localStorage.access_token },
+          params: { productName: val }
         })
         this.products = data
       } catch (error) {
