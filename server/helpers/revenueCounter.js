@@ -108,7 +108,7 @@ const countLast30DaysRevenue = (transactions) => {
 const countLast60DaysRevenue = (transactions) => {
   let totalRevenueLast60Days = 0;
   transactions.forEach((el) => {
-    if (new Date(el.createdAt) >= sixtyDaysAgo && new Date(el.createdAt) <= new Date()) {
+    if (new Date(el.createdAt) < sixtyDaysAgo && new Date(el.createdAt) >= thirtyDaysAgo) {
       totalRevenueLast60Days += el.price;
     }
   });
@@ -132,7 +132,7 @@ const countPreviousWeekProductSold = (transactions) => {
 
   transactions.forEach((el) => {
     if (new Date(el.createdAt) < sevenDaysAgo && new Date(el.createdAt) >= last14DaysAgo) {
-      totalProductSoldLast14Days += el.price;
+      totalProductSoldLast14Days += el.amount;
     }
   });
   return totalProductSoldLast14Days;
@@ -143,7 +143,7 @@ const countLast30DaysProductSold = (transactions) => {
 
   transactions.forEach((el) => {
     if (new Date(el.createdAt) >= thirtyDaysAgo && new Date(el.createdAt) <= new Date()) {
-      totalProductSoldLast30Days += el.price;
+      totalProductSoldLast30Days += el.amount;
     }
   });
   return totalProductSoldLast30Days;
@@ -153,8 +153,8 @@ const countLast30DaysProductSold = (transactions) => {
 const countLast60DaysProductSold = (transactions) => {
   let totalProductSoldLast60Days = 0;
   transactions.forEach((el) => {
-    if (new Date(el.createdAt) >= sixtyDaysAgo && new Date(el.createdAt) <= new Date()) {
-      totalProductSoldLast60Days += el.price;
+    if (new Date(el.createdAt) < sixtyDaysAgo && new Date(el.createdAt) >= sixtyDaysAgo) {
+      totalProductSoldLast60Days += el.amount;
     }
   });
   return totalProductSoldLast60Days;
