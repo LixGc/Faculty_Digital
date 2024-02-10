@@ -13,7 +13,7 @@ export default {
     },
     data () {
         return {
-            showAddProductModal: false
+            showAddProductModal: false,
         }
     },
     methods: {
@@ -23,6 +23,9 @@ export default {
         },
         closeAddProductModal () {
             this.showAddProductModal=false;
+        },
+        fetchProductWithFilter (val) {
+            this.fetchProduct(val)
         },
     },
     computed: {
@@ -62,7 +65,7 @@ export default {
             </div>
             <div class="flex justify-between">
                 <div class="md:w-1/3">
-                    <SearchButton />
+                    <SearchButton @fetchProductWithFilter="fetchProductWithFilter" />
                 </div>
                 <div class="md:w-1/3 text-right mr-8">
                     <button @click.prevent="openAddProductModal"

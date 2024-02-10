@@ -3,6 +3,15 @@ import { mapActions, mapState } from 'pinia';
 import { useProductStore } from '../stores/product';
 export default {
     props: ['product'],
+    data () {
+        return {
+            name: this.product?.name,
+            imageUrl: this.product?.imageUrl,
+            category: this.product?.category,
+            price: this.product?.price,
+            stock: this.product?.stock
+        }
+    },
     methods: {
         ...mapActions(useProductStore, ['editProduct']),
         onClose () {
@@ -11,11 +20,11 @@ export default {
         submitEdit () {
             this.editProduct({
                 id: this.product.id,
-                name: this.product.name,
-                imageUrl: this.product.imageUrl,
-                category: this.product.category,
-                price: this.product.stock,
-                stock: this.product.stock
+                name: this.name,
+                imageUrl: this.imageUrl,
+                category: this.category,
+                price: this.stock,
+                stock: this.stock
             }).then(() => {
                 this.$emit('close-modal');
             });
@@ -41,22 +50,22 @@ export default {
                     <form @submit.prevent="submitEdit" class="space-y-4">
                         <div>
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Name</label>
-                            <input v-model="product.name" type="text" name="name" id="name"
+                            <input v-model="name" type="text" name="name" id="name"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white"
                                 required />
                         </div>
                         <div>
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image Url</label>
-                            <input v-model="product.imageUrl" type="text" name="imageUrl" id="imageUrl"
+                            <input v-model="imageUrl" type="text" name="imageUrl" id="imageUrl"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 required />
                         </div>
                         <div>
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                            <select v-model="product.category"
+                            <select v-model="category"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 required>
-                                <option :value="product.category" selected disabled>{{ product.category }}</option>
+                                <option :value="category" selected disabled>{{ category }}</option>
                                 <option v-for="(category, index) in filteredCategories" :key="index" :value="category">
                                     {{ category }}
                                 </option>
@@ -64,13 +73,13 @@ export default {
                         </div>
                         <div>
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                            <input v-model="product.price" type="number" name="price" id="price"
+                            <input v-model="price" type="number" name="price" id="price"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white"
                                 required />
                         </div>
                         <div>
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stock</label>
-                            <input v-model="product.stock" type="number" name="stock" id="stock"
+                            <input v-model="stock" type="number" name="stock" id="stock"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white"
                                 required />
                         </div>

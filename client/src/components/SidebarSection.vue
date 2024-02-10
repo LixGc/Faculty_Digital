@@ -1,3 +1,32 @@
+<script>
+export default {
+    methods: {
+        navigateToProductDashboard () {
+            this.$router.push('/')
+        },
+        navigateToRevenueDashboard () {
+            this.$router.push('/revenue')
+        },
+        logout () {
+            Swal.fire({
+                title: 'Are you sure?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Log Out!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire('Logged Out!', 'Do come back next time!.')
+                    localStorage.clear()
+                    this.hasLogin=false
+                    this.$router.push('/login')
+                }
+            })
+        },
+    },
+}
+</script>
 <template>
     <div>
         <div class="h-full p-3 space-y-2 w-60 dark:bg-gray-900 dark:text-gray-100 fixed left-0 top-0 bottom-0">
@@ -16,7 +45,8 @@
             <div class="divide-y dark:divide-gray-700">
                 <ul class="pt-2 pb-4 space-y-1 text-sm">
                     <li class="dark:bg-gray-800 dark:text-gray-50">
-                        <a rel="noopener noreferrer" href="#" class="flex items-center p-2 space-x-3 rounded-md">
+                        <a @click.prevent="navigateToProductDashboard" rel="noopener noreferrer" href="#"
+                            class="flex items-center p-2 space-x-3 rounded-md">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                                 class="w-5 h-5 fill-current dark:text-gray-400">
                                 <path
@@ -27,7 +57,8 @@
                         </a>
                     </li>
                     <li>
-                        <a rel="noopener noreferrer" href="#" class="flex items-center p-2 space-x-3 rounded-md">
+                        <a @click.prevent="navigateToRevenueDashboard" rel="noopener noreferrer" href="#"
+                            class="flex items-center p-2 space-x-3 rounded-md">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                                 class="w-5 h-5 fill-current dark:text-gray-400">
                                 <path
@@ -44,7 +75,8 @@
                         </a>
                     </li>
                     <li>
-                        <a rel="noopener noreferrer" href="#" class="flex items-center p-2 space-x-3 rounded-md">
+                        <a @click.prevent="logout" rel="noopener noreferrer" href="#"
+                            class="flex items-center p-2 space-x-3 rounded-md">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                                 class="w-5 h-5 fill-current dark:text-gray-400">
                                 <path

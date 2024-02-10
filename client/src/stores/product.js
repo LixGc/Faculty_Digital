@@ -4,15 +4,34 @@ export const useProductStore = defineStore('product', {
   state: () => ({
     baseUrl: 'http://localhost:3000/product/',
     products: [],
+    revenues: [],
     categories: ['Furniture', 'Electronics', 'Decorations', 'Clothing']
   }),
   actions: {
-    async fetchProduct() {
+    async fetchProduct(val) {
       try {
-        const { data } = await axios(this.baseUrl + 'product-dashboard', {
-          headers: { access_token: localStorage.access_token }
+        const { data } = await axios.get(this.baseUrl + 'product-dashboard', {
+          headers: { access_token: localStorage.access_token },
+          params: { productName: val }
         })
         this.products = data
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.response.data.message
+            ? error.response.data.message
+            : 'Oops, something went wrong'
+        })
+      }
+    },
+    async fetchRevenue(val) {
+      try {
+        const { data } = await axios.get(this.baseUrl + 'revenue-dashboard', {
+          headers: { access_token: localStorage.access_token },
+          params: { transactionProductName: val }
+        })
+        this.revenues = data
       } catch (error) {
         Swal.fire({
           icon: 'error',
@@ -40,7 +59,7 @@ export const useProductStore = defineStore('product', {
             price: val.price,
             stock: val.stock
           }
-          await axios.put(this.baseUrl + 'edit-product/' + value.id, value, {
+          await axios.put(this.baseUrl + 'edit-product/' + val.id, value, {
             headers: { access_token: localStorage.access_token }
           })
           this.fetchProduct()
@@ -77,8 +96,9 @@ export const useProductStore = defineStore('product', {
           icon: 'error',
           title: 'Oops...',
           text: error.response.data.message
+            ? error.response.data.message
+            : 'Oops, something went wrong'
         })
-        console.log(error)
       }
     },
     async deleteProduct(id) {
@@ -93,7 +113,7 @@ export const useProductStore = defineStore('product', {
           confirmButtonText: 'Yes, delete it!'
         })
         if (confirmation.isConfirmed) {
-          await axios.delete(this.baseUrl + 'delete-product/', id, {
+          await axios.delete(this.baseUrl + 'delete-product/' + id, {
             headers: { access_token: localStorage.access_token }
           })
           this.fetchProduct()
@@ -104,8 +124,9 @@ export const useProductStore = defineStore('product', {
           icon: 'error',
           title: 'Oops...',
           text: error.response.data.message
+            ? error.response.data.message
+            : 'Oops, something went wrong'
         })
-        console.log(error)
       }
     }
   }
