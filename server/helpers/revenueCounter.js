@@ -108,7 +108,7 @@ const countLast30DaysRevenue = (transactions) => {
 const countLast60DaysRevenue = (transactions) => {
   let totalRevenueLast60Days = 0;
   transactions.forEach((el) => {
-    if (new Date(el.createdAt) < sixtyDaysAgo && new Date(el.createdAt) >= thirtyDaysAgo) {
+    if (new Date(el.createdAt) > sixtyDaysAgo && new Date(el.createdAt) < thirtyDaysAgo) {
       totalRevenueLast60Days += el.price;
     }
   });
@@ -153,7 +153,7 @@ const countLast30DaysProductSold = (transactions) => {
 const countLast60DaysProductSold = (transactions) => {
   let totalProductSoldLast60Days = 0;
   transactions.forEach((el) => {
-    if (new Date(el.createdAt) < sixtyDaysAgo && new Date(el.createdAt) >= sixtyDaysAgo) {
+    if (new Date(el.createdAt) > sixtyDaysAgo && new Date(el.createdAt) < thirtyDaysAgo) {
       totalProductSoldLast60Days += el.amount;
     }
   });
