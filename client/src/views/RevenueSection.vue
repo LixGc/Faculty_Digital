@@ -10,13 +10,16 @@ export default {
     },
     methods: {
         ...mapActions(useProductStore, ['fetchRevenue']),
+        fetchProductRevenueWithFilter (val) {
+            this.fetchRevenue(val)
+        },
     },
     computed: {
         ...mapState(useProductStore, ['revenues'])
     },
     created () {
         this.fetchRevenue();
-    }
+    },
 }
 </script>
 <template>
@@ -75,7 +78,7 @@ export default {
                 </div>
                 <div class="w-full md:w-1/5 px-4 mb-4">
                     <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
-                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Total Revenue Last 7 Days</h6>
+                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">This Week's Revenue</h6>
                         <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
                             ${{ revenues.totalRevenueLast7Days }}
                         </h6>
@@ -83,7 +86,7 @@ export default {
                 </div>
                 <div class="w-full md:w-1/5 px-4 mb-4">
                     <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
-                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Total Previous Week's Revenue</h6>
+                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Previous Week's Revenue</h6>
                         <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
                             ${{ revenues.totalRevenuePreviousWeek }}
                         </h6>
@@ -91,12 +94,11 @@ export default {
                 </div>
                 <div class="w-full md:w-1/2 px-4 mb-4">
                     <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
-                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">This Week's Revenue Vs Previous
-                            Week's
+                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">This Week's Revenue Vs Previous Week's
                             Revenue</h6>
                         <h6 v-if="revenues.thisWeekRevenueComparedWithPreviousWeekRevenue < 0"
                             class="text-lg font-semibold text-red-500">
-                            -${{ revenues.thisWeekRevenueComparedWithPreviousWeekRevenue }}
+                            -${{ Math.abs(revenues.thisWeekRevenueComparedWithPreviousWeekRevenue) }}
                         </h6>
                         <h6 v-else-if="revenues.thisWeekRevenueComparedWithPreviousWeekRevenue > 0"
                             class="text-lg font-semibold text-green-500">
@@ -109,7 +111,7 @@ export default {
                 </div>
             </div>
             <div class="w-full md:w-1/3">
-                <SearchButton />
+                <SearchButton @fetchProductRevenueWithFilter="fetchProductRevenueWithFilter" />
             </div>
             <div class="flex flex-col overflow-x-auto text-xs">
                 <table class="min-w-full bg-white border border-gray-300">

@@ -14,7 +14,6 @@ export default {
     data () {
         return {
             showAddProductModal: false,
-            search: ""
         }
     },
     methods: {
@@ -33,12 +32,6 @@ export default {
         ...mapState(useProductStore, ['products']),
         totalStocks () {
             return this.products.reduce((total, product) => total+product.stock, 0);
-        },
-    },
-    watch: {
-        search: {
-            handler: 'searchProducts',
-            immediate: true,
         },
     },
     created () {
