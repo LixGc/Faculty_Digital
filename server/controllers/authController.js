@@ -57,7 +57,7 @@ class AuthController {
         },
         defaults: {
           email: payload.email,
-          password: "ThisIsRandomPassword(So when it is being compared with real password will always result in false)",
+          password: "ThisIsRandomPassword123!(So when it is being compared with real password will always result in false)",
         },
         hooks: false,
       });
@@ -71,6 +71,7 @@ class AuthController {
       }
       res.status(status).json({ access_token });
     } catch (error) {
+      console.log(error);
       res.status(500).json({ message: "Internal Server Error" });
     }
   }
