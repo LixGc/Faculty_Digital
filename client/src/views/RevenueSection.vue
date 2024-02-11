@@ -178,7 +178,7 @@ export default {
                 </div>
                 <div class="w-full md:w-1/4 px-4 mb-4">
                     <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
-                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Last 30 Days Ago Revenue</h6>
+                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Last 30 Days Ago Product Sold</h6>
                         <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
                             {{ revenues.totalProductSoldLast30Days }}
                         </h6>
@@ -186,7 +186,7 @@ export default {
                 </div>
                 <div class="w-full md:w-1/4  px-4 mb-4">
                     <div class="bg-white dark:bg-gray-800 shadow-md rounded-md p-4">
-                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Last 30-60 Days Ago Revenue</h6>
+                        <h6 class="text-gray-500 dark:text-gray-400 mb-2 text-sm">Last 30-60 Days Ago Product Sold</h6>
                         <h6 class="text-lg font-semibold text-gray-800 dark:text-gray-200" id="total-product">
                             {{ revenues.totalProductSoldLast60Days }}
                         </h6>
