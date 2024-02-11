@@ -61,7 +61,6 @@ class AuthController {
         },
         hooks: false,
       });
-
       const access_token = signToken({
         id: user.id,
       });

@@ -2,8 +2,8 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    baseUrl: 'http://localhost:3000/auth/',
-    // baseUrl: 'https://facultydigital.flixy.online/auth/',
+    // baseUrl: 'http://localhost:3000/auth/',
+    baseUrl: 'https://facultydigital.flixy.online/auth/',
     hasLogin: false
   }),
   actions: {
@@ -51,13 +51,13 @@ export const useAuthStore = defineStore('auth', {
     },
     async handleGoogleLogin(response) {
       try {
-        console.log(response)
         const { data } = await axios.post(
           this.baseUrl + 'google-login',
           {},
           { headers: { google_token: response.credential } }
         )
-        localStorage.setItem('access_token', data.access_token)
+        const access_token = data.access_token
+        localStorage.setItem('access_token', access_token)
         this.router.push('/')
         Swal.fire({
           position: 'top-end',

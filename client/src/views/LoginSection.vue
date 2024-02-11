@@ -79,7 +79,7 @@ export default {
                             <p class="block text-sm font-medium text-gray-700 text-center">Or</p>
                         </div>
                         <div class="py-2">
-                            <GoogleLogin style="margin-left: 21%;" :callback="handleGoogleLogin" />
+                            <GoogleLogin style="margin-left: 15%;" :callback="handleGoogleLogin" />
                         </div>
                     </form>
                 </div>

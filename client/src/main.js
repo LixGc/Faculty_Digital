@@ -9,7 +9,7 @@ pinia.use(({ store }) => {
   store.router = markRaw(router)
 })
 app.use(vue3GoogleLogin, {
-  clientId: '[YOUR_GOOGLE_CLIENT_ID]'
+  clientId: '87973030685-3mlll838f2nmrj2445nlidjo9v77btv2.apps.googleusercontent.com'
 })
 app.use(pinia)
 app.use(router)
